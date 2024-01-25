@@ -62,7 +62,8 @@ export async function createSecret(
   key: string,
   keyId: string,
   name: string,
-  secret: string
+  secret: string,
+  repositorySecrets: string[]
 ): Promise<void> {
   //Check if libsodium is ready and then proceed.
   await sodium.ready
@@ -79,20 +80,37 @@ export async function createSecret(
     encBytes,
     sodium.base64_variants.ORIGINAL
   )
-
-  await octokit.request(
-    `PUT /repositories/${repositoryId}/environments/${environment}/secrets/${name}`,
-    {
-      repository_id: repositoryId,
-      environment_name: environment,
-      secret_name: name,
-      encrypted_value: encryptedValue,
-      key_id: keyId,
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28'
+  console.log(JSON.stringify(repositorySecrets))
+  console.log(name)
+  if (repositorySecrets.includes(name)) {
+    await octokit.request(
+      `PUT /repositories/${repositoryId}/actions/secrets/${name}`,
+      {
+        repository_id: repositoryId,
+        environment_name: environment,
+        secret_name: name,
+        encrypted_value: encryptedValue,
+        key_id: keyId,
+        headers: {
+          'X-GitHub-Api-Version': '2022-11-28'
+        }
       }
-    }
-  )
+    )
+  } else {
+    await octokit.request(
+      `PUT /repositories/${repositoryId}/environments/${environment}/secrets/${name}`,
+      {
+        repository_id: repositoryId,
+        environment_name: environment,
+        secret_name: name,
+        encrypted_value: encryptedValue,
+        key_id: keyId,
+        headers: {
+          'X-GitHub-Api-Version': '2022-11-28'
+        }
+      }
+    )
+  }
 }
 
 export async function getPublicKey(
