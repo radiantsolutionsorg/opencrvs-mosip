@@ -523,6 +523,16 @@ function storeSecrets(environment: string, answers: Answers) {
         valueLabel: 'SUPER_USER_PASSWORD',
         initial: process.env.SUPER_USER_PASSWORD || generateLongPassword(),
         scope: 'ENVIRONMENT' as const
+      },
+      {
+        name: 'encryptionKey',
+        type: 'text' as const,
+        message: 'Input the password for the disk encryption key',
+        valueType: 'SECRET' as const,
+        validate: notEmpty,
+        valueLabel: 'ENCRYPTION_KEY',
+        initial: process.env.ENCRYPTION_KEY || generateLongPassword(),
+        scope: 'ENVIRONMENT' as const
       }
     ],
     existingValues
@@ -721,6 +731,26 @@ function storeSecrets(environment: string, answers: Answers) {
       scope: 'ENVIRONMENT' as const
     },
     {
+      name: 'smtpSecure',
+      type: 'select' as const,
+      message: 'Is the SMTP connection made securely using TLS?',
+      choices: [
+        {
+          title: 'True',
+          value: 'true'
+        },
+        {
+          title: 'False',
+          value: 'false'
+        }
+      ],
+      valueType: 'SECRET' as const,
+      validate: notEmpty,
+      valueLabel: 'SMTP_SECURE',
+      initial: process.env.SMTP_SECURE,
+      scope: 'ENVIRONMENT' as const
+    },
+    {
       name: 'senderEmailAddress',
       type: 'text' as const,
       message: 'What is your sender email address?',
@@ -747,30 +777,34 @@ function storeSecrets(environment: string, answers: Answers) {
   await promptAndStoreAnswer(environment, emailQuestions, existingValues)
 
   log('\n', kleur.bold().underline('Notification'))
-  const { notificationTransport } = await prompts(
-    [
+  const notificationTransportQuestion = {
+    name: 'notificationTransport',
+    type: 'select' as const,
+    message: 'Notification transport for 2FA, informant and user messaging',
+    choices: [
       {
-        name: 'notificationTransport',
-        type: 'select' as const,
-        message: 'Notification transport for 2FA, informant and user messaging',
-        choices: [
-          {
-            title: 'Email (with SMTP details)',
-            value: 'email'
-          },
-          {
-            title: 'SMS (Infobip)',
-            value: 'sms'
-          }
-        ],
-        valueLabel: 'NOTIFICATION_TRANSPORT',
-        valueType: 'VARIABLE' as const
+        title: 'Email (with SMTP details)',
+        value: 'email'
+      },
+      {
+        title: 'SMS (Infobip)',
+        value: 'sms'
       }
-    ].map(questionToPrompt)
+    ],
+    valueLabel: 'NOTIFICATION_TRANSPORT',
+    valueType: 'VARIABLE' as const,
+    scope: 'ENVIRONMENT' as const,
+    initial: process.env.NOTIFICATION_TRANSPORT
+  }
+  const { notificationTransport } = await prompts(
+    [notificationTransportQuestion].map(questionToPrompt)
   )
-
+  ALL_QUESTIONS.push(notificationTransportQuestion)
   if (notificationTransport.includes('sms')) {
+    ALL_ANSWERS.push({ notificationTransport: 'sms' })
     await promptAndStoreAnswer(environment, smsQuestions, existingValues)
+  } else {
+    ALL_ANSWERS.push({ notificationTransport: 'email' })
   }
 
   const allAnswers = ALL_ANSWERS.reduce((acc, answer) => {
