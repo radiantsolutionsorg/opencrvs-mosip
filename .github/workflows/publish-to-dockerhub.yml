@@ -24,7 +24,7 @@ jobs:
         if: github.event_name == 'push'
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
-        environment:
+        env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
           DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_REPO }}
