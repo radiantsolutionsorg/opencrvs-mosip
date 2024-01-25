@@ -38,7 +38,7 @@ all:
 
 docker-manager-first:
   hosts:
-    farajaland-dev:
+    opencrvs-mosip:
       ansible_host: '139.59.71.11'
       data_label: data1
 
