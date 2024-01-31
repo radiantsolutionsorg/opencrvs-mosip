@@ -35,6 +35,39 @@ jobs:
       outcome: ${{ steps.deploy.outcome }}
     timeout-minutes: 60
     steps:
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        env:
+          DOMAIN: ${{ vars.DOMAIN }}
+          REPLICAS: ${{ vars.REPLICAS }}
+          NOTIFICATION_TRANSPORT: ${{ vars.NOTIFICATION_TRANSPORT }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+          DOCKERHUB_ACCOUNT: ${{ secrets.DOCKERHUB_ACCOUNT }}
+          DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_REPO }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+          KIBANA_USERNAME: ${{ secrets.KIBANA_USERNAME }}
+          KIBANA_PASSWORD: ${{ secrets.KIBANA_PASSWORD }}
+          MONGODB_ADMIN_USER: ${{ secrets.MONGODB_ADMIN_USER }}
+          MONGODB_ADMIN_PASSWORD: ${{ secrets.MONGODB_ADMIN_PASSWORD }}
+          ELASTICSEARCH_SUPERUSER_PASSWORD: ${{ secrets.ELASTICSEARCH_SUPERUSER_PASSWORD }}
+          MINIO_ROOT_USER: ${{ secrets.MINIO_ROOT_USER }}
+          MINIO_ROOT_PASSWORD: ${{ secrets.MINIO_ROOT_PASSWORD }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          WIREGUARD_ADMIN_PASSWORD: ${{ secrets.WIREGUARD_ADMIN_PASSWORD }}
+          INFOBIP_SENDER_ID: ${{ secrets.INFOBIP_SENDER_ID }}
+          INFOBIP_GATEWAY_ENDPOINT: ${{ secrets.INFOBIP_GATEWAY_ENDPOINT }}
+          INFOBIP_API_KEY: ${{ secrets.INFOBIP_API_KEY }}
+          SENDER_EMAIL_ADDRESS: ${{ secrets.SENDER_EMAIL_ADDRESS }}
+          SUPER_USER_PASSWORD: ${{ secrets.SUPER_USER_PASSWORD }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_ARGS: ${{ vars.SSH_ARGS }}
+          CONTENT_SECURITY_POLICY_WILDCARD: ${{ vars.CONTENT_SECURITY_POLICY_WILDCARD }}
       - name: Clone core
         uses: actions/checkout@v3
         with:
@@ -142,40 +175,6 @@ jobs:
           --country_config_version=${{ github.event.inputs.countryconfig-image-tag }} \
           --replicas=${{ env.REPLICAS }}
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        if: ${{ github.event.inputs.debug == true }}
-        env:
-          DOMAIN: ${{ vars.DOMAIN }}
-          REPLICAS: ${{ vars.REPLICAS }}
-          NOTIFICATION_TRANSPORT: ${{ vars.NOTIFICATION_TRANSPORT }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
-          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
-          DOCKERHUB_ACCOUNT: ${{ secrets.DOCKERHUB_ACCOUNT }}
-          DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_REPO }}
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-          KIBANA_USERNAME: ${{ secrets.KIBANA_USERNAME }}
-          KIBANA_PASSWORD: ${{ secrets.KIBANA_PASSWORD }}
-          MONGODB_ADMIN_USER: ${{ secrets.MONGODB_ADMIN_USER }}
-          MONGODB_ADMIN_PASSWORD: ${{ secrets.MONGODB_ADMIN_PASSWORD }}
-          ELASTICSEARCH_SUPERUSER_PASSWORD: ${{ secrets.ELASTICSEARCH_SUPERUSER_PASSWORD }}
-          MINIO_ROOT_USER: ${{ secrets.MINIO_ROOT_USER }}
-          MINIO_ROOT_PASSWORD: ${{ secrets.MINIO_ROOT_PASSWORD }}
-          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-          WIREGUARD_ADMIN_PASSWORD: ${{ secrets.WIREGUARD_ADMIN_PASSWORD }}
-          INFOBIP_SENDER_ID: ${{ secrets.INFOBIP_SENDER_ID }}
-          INFOBIP_GATEWAY_ENDPOINT: ${{ secrets.INFOBIP_GATEWAY_ENDPOINT }}
-          INFOBIP_API_KEY: ${{ secrets.INFOBIP_API_KEY }}
-          SENDER_EMAIL_ADDRESS: ${{ secrets.SENDER_EMAIL_ADDRESS }}
-          SUPER_USER_PASSWORD: ${{ secrets.SUPER_USER_PASSWORD }}
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-          SSH_ARGS: ${{ vars.SSH_ARGS }}
-          CONTENT_SECURITY_POLICY_WILDCARD: ${{ vars.CONTENT_SECURITY_POLICY_WILDCARD }}
   reset:
     needs: deploy
     if: ${{ github.event.inputs.reset == 'true' && needs.deploy.outputs.outcome == 'success' }}
