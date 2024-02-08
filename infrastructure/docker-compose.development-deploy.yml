@@ -43,7 +43,7 @@ services:
     environment:
       - LANGUAGES=en,fr
       - SENTRY_DSN=${SENTRY_DSN}
-      - COUNTRY=FAR
+      - COUNTRY=IND
       - QA_ENV=true
       - NODE_ENV=production
       - NATIONAL_ID_OIDP_BASE_URL=${NATIONAL_ID_OIDP_BASE_URL}
