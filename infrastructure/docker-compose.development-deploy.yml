@@ -138,6 +138,8 @@ services:
       replicas: 1
     networks:
       - overlay_net
+    volumes:
+      - /data/secrets/mosip:/certs/mnt
     environment:
       - AUTH_URL=http://auth:4040
       - WEBHOOK_URL=http://countryconfig:3034/mosip-openhim-mediator
