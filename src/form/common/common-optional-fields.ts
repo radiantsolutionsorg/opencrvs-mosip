@@ -153,7 +153,13 @@ export const getNIDVerificationButton = (
   required: true,
   initialValue: '',
   validator,
-  conditionals,
+  conditionals: [
+    ...conditionals,
+    {
+      action: 'disable',
+      expression: `values.${fieldName}`
+    }
+  ],
   mapping: getFieldMapping('nationalIdVerification'),
   labelForVerified: formMessageDescriptors.nidVerified,
   labelForUnverified: formMessageDescriptors.nidNotVerified,

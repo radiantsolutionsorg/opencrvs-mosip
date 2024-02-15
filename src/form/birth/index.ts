@@ -19,7 +19,6 @@ import {
   getFirstNameField,
   getNationality,
   otherInformantType,
-  getNationalID,
   getDetailsExist,
   getReasonNotExisting
 } from '../common/common-required-fields'
@@ -65,12 +64,10 @@ import {
   ageOfParentsConditionals
 } from '../common/default-validation-conditionals'
 import {
-  getNationalIDValidators,
   informantFirstNameConditionals,
   informantFamilyNameConditionals,
   informantBirthDateConditionals,
-  exactDateOfBirthUnknownConditional,
-  hideIfNidIntegrationEnabled
+  exactDateOfBirthUnknownConditional
 } from '../common/default-validation-conditionals'
 import { documentsSection, registrationSection } from './required-sections'
 import { certificateHandlebars } from './certificate-handlebars'
@@ -258,11 +255,16 @@ export const birthForm: ISerializedForm = {
               certificateHandlebars.informantNationality,
               hideIfInformantMotherOrFather
             ), // Required field.
-            getNationalID(
-              'informantID',
-              hideIfNidIntegrationEnabled.concat(hideIfInformantMotherOrFather),
-              getNationalIDValidators('informant'),
-              certificateHandlebars.informantNID
+            // getNationalID(
+            //   'informantID',
+            //   hideIfInformantMotherOrFather,
+            //   getNationalIDValidators('informant'),
+            //   certificateHandlebars.informantNID
+            // ),
+            getNIDVerificationButton(
+              'informantNidVerification',
+              hideIfInformantMotherOrFather,
+              []
             ),
             // preceding field of address fields
             divider('informant-nid-seperator', [
@@ -314,7 +316,7 @@ export const birthForm: ISerializedForm = {
             //   getNationalIDValidators('mother'),
             //   certificateHandlebars.motherNID
             // ),
-            getNIDVerificationButton('iD', detailsExist, []),
+            getNIDVerificationButton('motherNidVerification', detailsExist, []),
             getFirstNameField(
               'motherNameInEnglish',
               motherFirstNameConditionals,
@@ -394,7 +396,7 @@ export const birthForm: ISerializedForm = {
             //   getNationalIDValidators('father'),
             //   certificateHandlebars.fatherNID
             // ),
-            getNIDVerificationButton('iD', detailsExist, []),
+            getNIDVerificationButton('fatherNidVerification', detailsExist, []),
             getFirstNameField(
               'fatherNameInEnglish',
               fatherFirstNameConditionals,

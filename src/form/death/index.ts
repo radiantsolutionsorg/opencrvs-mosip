@@ -42,7 +42,6 @@ import { formMessageDescriptors } from '../common/messages'
 import { Event, ISerializedForm } from '../types/types'
 import {
   getNationalIDValidators,
-  hideIfNidIntegrationEnabled,
   informantBirthDateConditionals,
   informantFamilyNameConditionals,
   ageOfIndividualConditionals,
@@ -288,7 +287,7 @@ export const deathForm = {
             //   getNationalIDValidators('informant'),
             //   certificateHandlebars.informantNID
             // ),
-            getNIDVerificationButton('informantID', [], []),
+            getNIDVerificationButton('informantNidVerification', [], []),
             // ADDRESS FIELDS WILL RENDER HERE
             divider('informant-address-separator'),
             registrationPhone,
