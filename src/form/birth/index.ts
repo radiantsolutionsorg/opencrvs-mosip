@@ -304,6 +304,17 @@ export const birthForm: ISerializedForm = {
               mothersDetailsExistConditionals
             ),
             getReasonNotExisting(certificateHandlebars.motherReasonNotApplying), // Strongly recommend is required if you want to register abandoned / orphaned children!
+            getNationality(
+              certificateHandlebars.motherNationality,
+              detailsExist
+            ), // Required field.
+            // getNationalID(
+            //   'iD',
+            //   hideIfNidIntegrationEnabled.concat(detailsExist),
+            //   getNationalIDValidators('mother'),
+            //   certificateHandlebars.motherNID
+            // ),
+            getNIDVerificationButton('iD', detailsExist, []),
             getFirstNameField(
               'motherNameInEnglish',
               motherFirstNameConditionals,
@@ -328,17 +339,6 @@ export const birthForm: ISerializedForm = {
               ),
               ageOfParentsConditionals
             ),
-            getNationality(
-              certificateHandlebars.motherNationality,
-              detailsExist
-            ), // Required field.
-            // getNationalID(
-            //   'iD',
-            //   hideIfNidIntegrationEnabled.concat(detailsExist),
-            //   getNationalIDValidators('mother'),
-            //   certificateHandlebars.motherNID
-            // ),
-            getNIDVerificationButton('iD', [], []),
             // preceding field of address fields
             divider('mother-nid-seperator', detailsExist),
             // ADDRESS FIELDS WILL RENDER HERE
@@ -384,6 +384,17 @@ export const birthForm: ISerializedForm = {
               fathersDetailsExistConditionals
             ),
             getReasonNotExisting('fatherReasonNotApplying'), // Strongly recommend is required if you want to register abandoned / orphaned children!
+            getNationality(
+              certificateHandlebars.fatherNationality,
+              detailsExist
+            ), // Required field.
+            // getNationalID(
+            //   'iD',
+            //   hideIfNidIntegrationEnabled.concat(detailsExist),
+            //   getNationalIDValidators('father'),
+            //   certificateHandlebars.fatherNID
+            // ),
+            getNIDVerificationButton('iD', detailsExist, []),
             getFirstNameField(
               'fatherNameInEnglish',
               fatherFirstNameConditionals,
@@ -408,17 +419,6 @@ export const birthForm: ISerializedForm = {
               ),
               ageOfParentsConditionals
             ),
-            getNationality(
-              certificateHandlebars.fatherNationality,
-              detailsExist
-            ), // Required field.
-            // getNationalID(
-            //   'iD',
-            //   hideIfNidIntegrationEnabled.concat(detailsExist),
-            //   getNationalIDValidators('father'),
-            //   certificateHandlebars.fatherNID
-            // ),
-            getNIDVerificationButton('iD', [], []),
             // preceding field of address fields
             divider('father-nid-seperator', detailsExist),
             // ADDRESS FIELDS WILL RENDER HERE
