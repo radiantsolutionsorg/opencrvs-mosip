@@ -142,7 +142,8 @@ services:
       - /data/secrets/mosip:/certs/mnt
     environment:
       - AUTH_URL=http://auth:4040
-      - WEBHOOK_URL=http://countryconfig:3034/mosip-openhim-mediator
+      - WEBHOOK_URL=http://webhooks:2525/webhooks
+      - OPENHIM_MEDIATOR_URL=http://countryconfig:3040/mosip-openhim-mediator
       - CLIENT_ID=${MOSIP_MEDIATOR_CLIENT_ID}
       - CLIENT_SECRET=${MOSIP_MEDIATOR_CLIENT_SECRET}
       - SHA_SECRET=${MOSIP_MEDIATOR_SHA_SECRET}
