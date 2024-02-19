@@ -137,18 +137,18 @@ services:
     deploy:
       labels:
         - 'traefik.enable=true'
-        - 'traefik.http.routers.webhooks.rule=Host(`mosip-mediator.{{hostname}}`)'
-        - 'traefik.http.services.webhooks.loadbalancer.server.port=4545'
-        - 'traefik.http.routers.webhooks.tls=true'
-        - 'traefik.http.routers.webhooks.tls.certresolver=certResolver'
-        - 'traefik.http.routers.webhooks.entrypoints=web,websecure'
+        - 'traefik.http.routers.mosip-mediator.rule=Host(`mosip-mediator.{{hostname}}`)'
+        - 'traefik.http.services.mosip-mediator.loadbalancer.server.port=4545'
+        - 'traefik.http.routers.mosip-mediator.tls=true'
+        - 'traefik.http.routers.mosip-mediator.tls.certresolver=certResolver'
+        - 'traefik.http.routers.mosip-mediator.entrypoints=web,websecure'
         - 'traefik.docker.network=opencrvs_overlay_net'
-        - 'traefik.http.middlewares.webhooks.headers.customresponseheaders.Pragma=no-cache'
-        - 'traefik.http.middlewares.webhooks.headers.customresponseheaders.Cache-control=no-store'
-        - 'traefik.http.middlewares.webhooks.headers.customresponseheaders.X-Robots-Tag=none'
-        - 'traefik.http.middlewares.webhooks.headers.stsseconds=31536000'
-        - 'traefik.http.middlewares.webhooks.headers.stsincludesubdomains=true'
-        - 'traefik.http.middlewares.webhooks.headers.stspreload=true'
+        - 'traefik.http.middlewares.mosip-mediator.headers.customresponseheaders.Pragma=no-cache'
+        - 'traefik.http.middlewares.mosip-mediator.headers.customresponseheaders.Cache-control=no-store'
+        - 'traefik.http.middlewares.mosip-mediator.headers.customresponseheaders.X-Robots-Tag=none'
+        - 'traefik.http.middlewares.mosip-mediator.headers.stsseconds=31536000'
+        - 'traefik.http.middlewares.mosip-mediator.headers.stsincludesubdomains=true'
+        - 'traefik.http.middlewares.mosip-mediator.headers.stspreload=true'
       replicas: 1
     networks:
       - overlay_net
