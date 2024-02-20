@@ -6,13 +6,10 @@ on:
       environment:
         type: choice
         description: Machine to provision
-        default: qa
+        default: development
         required: true
         options:
           - development
-          - staging
-          - qa
-          - production
       tag:
         type: choice
         description: Select group tag you want to execute
