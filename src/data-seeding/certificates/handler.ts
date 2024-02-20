@@ -16,23 +16,23 @@ export async function certificateHandler(_: Request, h: ResponseToolkit) {
   const Certificates = [
     {
       event: 'birth',
-      fileName: 'farajaland-birth-certificate-v1.svg',
+      fileName: 'India-birth-certificate-v2.svg',
       svgCode: readFileSync(
-        './src/data-seeding/certificates/source/BirthCertificate.svg'
+        './src/data-seeding/certificates/source/India-birth-certificate-v2.svg'
       ).toString()
     },
     {
       event: 'death',
-      fileName: 'farajaland-death-certificate-v1.svg',
+      fileName: 'India-death-certificate-v2.svg',
       svgCode: readFileSync(
-        './src/data-seeding/certificates/source/DeathCertificate.svg'
+        './src/data-seeding/certificates/source/India-death-certificate-v2.svg'
       ).toString()
     },
     {
       event: 'marriage',
-      fileName: 'farajaland-marriage-certificate-v1.svg',
+      fileName: 'India-marriage-certificate-v2.svg',
       svgCode: readFileSync(
-        './src/data-seeding/certificates/source/MarriageCertificate.svg'
+        './src/data-seeding/certificates/source/India-marriage-certificate-v2.svg'
       ).toString()
     }
   ]
