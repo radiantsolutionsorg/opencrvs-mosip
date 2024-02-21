@@ -1,6 +1,7 @@
 # Changelog
 
-## [1.4.1](https://github.com/opencrvs/opencrvs-farajaland/compare/v1.4.0...v1.4.1)
+
+## [1.4.0](https://github.com/opencrvs/opencrvs-farajaland/compare/v1.3.3...v1.4.0) (TBD)
 
 - Added examples for configuring HTTP-01, DNS-01, and manual HTTPS certificates. By default, development and QA environments use HTTP-01, while others use DNS-01.
 - All secrets & variables defined in Github Secrets are now passed automatically to the deployment script.
@@ -105,20 +106,6 @@ See [Releases](https://github.com/opencrvs/opencrvs-farajaland/releases) for rel
 
   ##### We will be deprecating the counterpart of the above mentioned handlebars that contains only the label of the specified location in a future version so we highly recommend that implementers update their certificates to use these new ones.
 
-- #### "Spouse" section in Farajaland death form
-
-  Spouse section is an optional section in death form. Going forward it will be included in Farajaland example configuration.
-
-- #### Type of ID dropdown
-  Farajaland forms will now include a dropdown to select the type of ID an individual is providing e.g. National ID, Driving License etc. instead of being restricted to only national ID number.
-- #### Number of dependents of deceased field
-  As an example of custom field, the deceased section in death form will now include the **numberOfDependants** field.
-- #### Reason for late registration field
-  The birth & death forms will include another custom field, **reasonForLateRegistration**, which makes use of "LATE_REGISTRATION_TARGET" configuration option in it's visibility conditional.
-
-## Bug fixes
-
-- Updated translations for form introduction page and sending for approval to reflect the default notification method being email.
-- Remove hard-coded conditionals from "occupation" field to make it usable in the deceased form
+### Bug fixes
 
 See [Releases](https://github.com/opencrvs/opencrvs-farajaland/releases) for release notes of older releases.
