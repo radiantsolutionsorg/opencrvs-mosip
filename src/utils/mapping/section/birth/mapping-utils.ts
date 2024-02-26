@@ -68,6 +68,14 @@ export function getSectionMapping(mappingId: string): ISectionMapping {
           {
             fieldName: certificateHandlebars.registrationLocation,
             operation: 'registrationLocationUserTransformer'
+          },
+          {
+            fieldName: certificateHandlebars.mosipAid,
+            operation: 'mosipAidTransformer'
+          },
+          {
+            fieldName: certificateHandlebars.mosipAIDLabel,
+            operation: 'mosipAidLabelTransformer'
           }
         ],
         mutation: {

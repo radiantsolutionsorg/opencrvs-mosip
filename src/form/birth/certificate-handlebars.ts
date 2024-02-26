@@ -146,5 +146,7 @@ export const certificateHandlebars = {
     'internationalAddressLine2PrimaryFather',
   internationalAddressLine3PrimaryFather:
     'internationalAddressLine3PrimaryFather',
-  internationalPostalCodePrimaryFather: 'internationalPostalCodePrimaryFather'
+  internationalPostalCodePrimaryFather: 'internationalPostalCodePrimaryFather',
+  mosipAid: 'mosipAid',
+  mosipAIDLabel: 'mosipAIDLabel'
 }
