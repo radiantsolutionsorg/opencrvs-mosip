@@ -10,36 +10,16 @@ all:
   vars:
     users:
       # If you need to remove access from someone, do not remove them from this list, but instead set their state: absent
-      - name: pyry
+      - name: provision
         ssh_keys:
-          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJBcrSLLdrkLrhqNQi7Uo/ZIWXb1y4kc0vGb16e2s0Jq pyry@opencrvs.org
-        state: present
-        sudoer: true
-      - name: tameem
-        ssh_keys:
-          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGUprcQyUFYwRto0aRpgriR95C1pgNxrQ0lEWEe1D8he haidertameem@gmail.com
-        state: present
-        sudoer: true
-      - name: riku
-        ssh_keys:
-          - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDWIF63S4f3z9wQMvWibmvl7MPuJ6EVrkP0HuvgNhcs/4DZYMcR/GRBvV4ldOSYMlBevIXycgGzNDxKJgENUuwIWanjBu7uVAHyD6+cIRD1h63qq7Cjv/2HYTfBDKOrKzPOhA6zWvKO0ZGWsjRXk5LWMCbKOkvKJCxOpj/NVBxeE4FTK5YADYPV3OSsmBtqTHrVLm2sMmShU/2hMYYswWkobidjX65+nK/X+3C+yJbHwiydVvn+QCrFlFfCLPWKe8rUpOxyxofPqWVQh6CHhHfT8okaOc9sOE8Qeip9ljo84DftJh3Xm3ynOdWK1hH2BvRvxNadWqcE1qECbkg4tx2x riku.rouvila@gmail.com
-        state: present
-        sudoer: true
-      - name: euan
-        ssh_keys:
-          - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDECqHO65UpyrrO8uueD06RxGaVVq22f152Rf8qVQQAAIGAMu6gCs7ztlZ8a3yQgSEIjM/Jl1/RqIVs6CziTEef74nLFTZ5Ufz3CLRVgdebBeSBEmhTfTUV0HLkSyNzwKFpuzJxucGd72ulPvEp6eHvyJAPJz37YcU8cjaL1v05T6s2ee99li35GlDDtCzfjVV4ZPAg5JdfWuTj41RAVC0LQhk2/NB4qEu37UxGGjhRFSjBEsS5LxI9QfvgrsHpl/VOn+soH7ZkK7kS6qRgNP/uYsXRWXhHaamcl5OX68gJWTbrW6c7PCqlbCWGnsHJswCmqPIthwXXMfC7ULDNLSKG6mslAt5Dyc8/MCr3vTW7pDyr2d0FvvY86SMQUggxv3qF7TZewqfX1bhK0fMLarIxVMQ1RFo//wN9QGA+2we8rxd2Y1Kr1DBuJyuwXPfv+Exo8yNYQ+x/AYH5k6UVcSYuaB8eYmplG2KQCxt8RBFtoChrwOKNRWLqXdKyfpdp5XmnnWxPvR95gf3h3yLocVYkF0i0uvKKJ0vt8J0Ezfkdfow0B1kUg5bPXKJROX7PwbaCPdYcxyDaO6wwOigRnSmoFvkH1pLb4j1RQAXcX531CHgfN6Izi/h0mpMS4bnyIUcv2GQr+h4z4TxcCtj7qpH2y6yw7XG12jVh7TfeesXG2Q== euanmillar77@gmail.com
-        state: present
-        sudoer: true
-      - name: tahmid
-        ssh_keys:
-          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINUml9O5ySwPtEMD1yGEYHlf9Z3jro97NWAnM9+ew9gn tahmidrahman.dsi@gmail.com
+          - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQClZ2OM4aj2c+jx7631wFGSV0tG/rOT6OL5Xh7Azb6cjwAZSJgRCTVh3hiDN03x2M1aM8CtW25Xi6mh4eF+R+uWdSEpZBWYAF7S4/4sVwGNqC0776Z3EcE7zqGmxzfESxBkO07d7tW3qEee6ZK0LxJm8x1X9NIA0Km5LEbLIz5/BNk42etqKi7AyqqDAnF22jQ+6mRgX1w06aXOWrd/N7krzzwSTUJ4urPHrfr+fkMbv1rDc7Q+WTRXMhykBaMxgIlBbeYv+Hi4TWJ+k0Wl0r1tUe7eRh9ehOxby6EWCbpG4Sh1UfGjyQRwo2hQH09yQ6KQhotn9ov9Bv8X0P++5jKbDJbevmTTnJTFastY9KDzZdFGUVfqNTkLk/KWvFMnVX7ABWp3n0kCc/0B8sQ4Zrd6oN9TCG+RVr+njom6LFUqnvp/z6hdAGT/qMR2OkBX5kJSqnNdwfHsLGT/e8z7FC+9k6qVoZpOEyIMzhBBUWyh3zSMfPPUC0FnBMpxgD9ZTjc= provision@ip-172-31-46-96
         state: present
         sudoer: true
 
 docker-manager-first:
   hosts:
-    opencrvs-mosip:
-      ansible_host: '139.59.71.11'
+    ip-172-31-46-96:
+      ansible_host: '35.80.140.106'
       data_label: data1
 
 # QA and staging servers are not configured to use workers.
