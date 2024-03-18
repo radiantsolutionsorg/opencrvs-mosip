@@ -180,35 +180,35 @@
 
 # MOSIP integration requires wireguard and some secrets to be installed
 # Ensure that the MOSIP supplied peer conf file containing your keys already exists on your servers in /etc/wireguard/
-- name: Install wireguard package
-  apt:
-    name: wireguard
-    state: present
-    update_cache: yes
+    - name: Install wireguard package
+      apt:
+        name: wireguard
+        state: present
+        update_cache: yes
 
-- name: Copy mosip wireguard peer 1 file
-  ansible.builtin.copy:
-    src: '/home/provision/mosip-certs/wireguard.conf'
-    dest: /etc/wireguard/mosip-peer1.conf
-    when: ansible_hostname == data1_hostname
+    - name: Copy mosip wireguard peer 1 file
+      ansible.builtin.copy:
+        src: '/home/provision/mosip-certs/wireguard.conf'
+        dest: /etc/wireguard/mosip-peer1.conf
+        when: ansible_hostname == data1_hostname
 
-- name: 'Create mosip secrets directory'
-  file:
-    path: /data/secrets/mosip
-    state: directory
-    group: 1000
-    owner: 1000
-    mode: g+rwx
+    - name: 'Create mosip secrets directory'
+      file:
+        path: /data/secrets/mosip
+        state: directory
+        group: 1000
+        owner: 1000
+        mode: g+rwx
 
-- name: Copy mosip encrypt cert file
-  ansible.builtin.copy:
-    src: '{{ mosip_seeder_encrypt_cert_path }}'
-    dest: /data/secrets/mosip/{{ mosip_seeder_encrypt_cert_filename }}
+    - name: Copy mosip encrypt cert file
+      ansible.builtin.copy:
+        src: '/home/provision/mosip-certs/ida.partner.crt'
+        dest: /data/secrets/mosip/{{ mosip_seeder_encrypt_cert_filename }}
 
-- name: Copy mosip encrypt sig file
-  ansible.builtin.copy:
-    src: '{{ mosip_seeder_encrypt_sig_path }}'
-    dest: /data/secrets/mosip/{{ mosip_seeder_encrypt_sig_filename }}
+    - name: Copy mosip encrypt sig file
+      ansible.builtin.copy:
+        src: '/home/provision/mosip-certs/keystore.p12'
+        dest: /data/secrets/mosip/{{ mosip_seeder_encrypt_sig_filename }}
 
 - hosts: docker-manager-first
   become: yes
